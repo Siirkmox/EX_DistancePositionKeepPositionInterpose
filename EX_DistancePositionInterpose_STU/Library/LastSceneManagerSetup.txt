@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/02_Interpose.unity
+- path: Assets/Scenes/00_KeepDistance.unity
   isLoaded: 1
   isActive: 1

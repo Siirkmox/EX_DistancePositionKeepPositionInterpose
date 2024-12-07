@@ -23,17 +23,23 @@ namespace Steerings
 
         public static SteeringOutput GetSteering(KinematicState _ownKS, GameObject _target, float _distance, float _angle)
         {
-            // Calculate the direction from the target to the current position
-            Vector3 directionFromTarget = Quaternion.Euler(0, 0, _angle) * Vector3.right;
+// get the target's orientation (as an angle)...
+            float targetOrientation = _target.transform.rotation.eulerAngles.z;
 
-            // Calculate the desired position based on the distance and angle
-            Vector3 requiredPosition = _target.transform.position + directionFromTarget * _distance;
+            // ... add the required angle
+            float requiredOrientation = targetOrientation + _angle;
 
-            // Use the surrogate target to represent the desired position
+            // convert the orientation into a direction (convert from angle to vector)
+            Vector3 requiredDirection = Utils.OrientationToVector(requiredOrientation).normalized;
+
+            // determine required position
+            Vector3 requiredPosition = _target.transform.position + requiredDirection * _distance;
+
+            // place surrogate target in required position
             SURROGATE_TARGET.transform.position = requiredPosition;
 
-            // Use the Arrive behavior to get the steering output
-            return Arrive.GetSteering(_ownKS, SURROGATE_TARGET);
+            //return Seek.GetSteering(me, SURROGATE_TARGET);
+            return Arrive.GetSteering(_ownKS, SURROGATE_TARGET, 0, 5);
         }
     }
 
