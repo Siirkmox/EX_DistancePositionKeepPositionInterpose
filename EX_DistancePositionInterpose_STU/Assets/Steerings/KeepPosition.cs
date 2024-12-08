@@ -23,7 +23,7 @@ namespace Steerings
 
         public static SteeringOutput GetSteering(KinematicState _ownKS, GameObject _target, float _distance, float _angle)
         {
-// get the target's orientation (as an angle)...
+            // get the target's orientation (as an angle)...
             float targetOrientation = _target.transform.rotation.eulerAngles.z;
 
             // ... add the required angle
