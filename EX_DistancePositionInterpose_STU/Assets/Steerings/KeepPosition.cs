@@ -38,7 +38,7 @@ namespace Steerings
             // place surrogate target in required position
             SURROGATE_TARGET.transform.position = requiredPosition;
 
-            //return Seek.GetSteering(me, SURROGATE_TARGET);
+            //return Seek.GetSteering(_ownKS, SURROGATE_TARGET);
             return Arrive.GetSteering(_ownKS, SURROGATE_TARGET, 0, 5);
         }
     }
